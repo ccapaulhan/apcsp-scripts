@@ -6,10 +6,11 @@ echo
 
 for file in $list ; do
 
-	fping -c1 -t300 $device 2>/dev/null 1>/dev/null
-       
-	if [ "$?" > 2 ] ; then
-		echo "$file is alive"; 
+	Response=$(ping -c 1 $file)
+	echo $Response       
+	if [[ $Response == *"1 packets transmitted"* ]] ; then
+		echo "Result: $file is alive";
+		 
 	
 	else 
 		echo "$file is dead"; 
